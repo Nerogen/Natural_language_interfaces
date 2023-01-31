@@ -7,5 +7,5 @@
 ### Usage
 #### Run in terminal next line:
     pip install -r ./Lab1/requirements.txt
-#### Then next line
+#### Then run main.py
     python ./Lab1/main.py
