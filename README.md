@@ -5,5 +5,7 @@
 ### python 3.11
 ### PyPDF2 3.0.1
 ### Usage
-### 
-  pip install -r ./Lab1/requirements.txt
+#### Run in terminal next line:
+    pip install -r ./Lab1/requirements.txt
+#### Then next line
+    python ./Lab1/main.py
