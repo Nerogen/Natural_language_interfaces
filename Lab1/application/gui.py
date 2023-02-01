@@ -24,10 +24,11 @@ if __name__ == '__main__':
                                                                                                         relx=0.5,
                                                                                                         rely=0.4,
                                                                                                         anchor=CENTER)
-    customtkinter.CTkButton(start_page, text="Work with Vocabulary", command=lambda: raise_frame(work_with_vocab)).place(
-                                                                                                        relx=0.5,
-                                                                                                        rely=0.5,
-                                                                                                        anchor=CENTER)
+    customtkinter.CTkButton(start_page, text="Work with Vocabulary",
+                            command=lambda: show_records(vocabulary={}, frame=work_with_vocab)).place(
+                                                                                                relx=0.5,
+                                                                                                rely=0.5,
+                                                                                                anchor=CENTER)
     customtkinter.CTkButton(start_page, text="Generate Lexeme Form", command=lambda: raise_frame(making_word_form)).place(
                                                                                                         relx=0.5,
                                                                                                         rely=0.6,
@@ -42,11 +43,12 @@ if __name__ == '__main__':
     input_data = customtkinter.CTkEntry(download_page, placeholder_text="input PDF name")
     input_data.place(relx=0.5, rely=0.4, anchor=CENTER)
 
-    # TO DO: change raise_frame(...) to appropriate function
-    customtkinter.CTkButton(download_page, text="Download Data", command=lambda: raise_frame(start_page)).place(
-                                                                                                        relx=0.5,
-                                                                                                        rely=0.5,
-                                                                                                        anchor=CENTER)
+    customtkinter.CTkButton(download_page, text="Download Data", command=lambda: download_data(
+        file_name,
+        frame=start_page)).place(
+                                 relx=0.5,
+                                 rely=0.5,
+                                 anchor=CENTER)
     customtkinter.CTkButton(download_page, text="Main Page", command=lambda: raise_frame(start_page)).place(
                                                                                                         relx=0.5,
                                                                                                         rely=0.9,
@@ -87,8 +89,12 @@ if __name__ == '__main__':
         relx=0.5,
         rely=0.9,
         anchor=CENTER)
-    customtkinter.CTkButton(work_with_vocab, text="Save Data", command=lambda: raise_frame(upload_page)).place(
-        relx=0.5,
+    customtkinter.CTkButton(work_with_vocab, text="Upload Data", command=lambda: raise_frame(upload_page)).place(
+        relx=0.35,
+        rely=0.8,
+        anchor=CENTER)
+    customtkinter.CTkButton(work_with_vocab, text="Filter Data", command=lambda: raise_frame(filter_page)).place(
+        relx=0.65,
         rely=0.8,
         anchor=CENTER)
 
@@ -101,11 +107,15 @@ if __name__ == '__main__':
 
     input_data = customtkinter.CTkEntry(upload_page, placeholder_text="input PDF name")
     input_data.place(relx=0.5, rely=0.4, anchor=CENTER)
+    file_to_upload = input_data.get()
 
-    customtkinter.CTkButton(upload_page, text="Download Data", command=lambda: raise_frame(start_page)).place(
-        relx=0.5,
-        rely=0.5,
-        anchor=CENTER)
+    customtkinter.CTkButton(upload_page, text="Upload Data", command=lambda: upload_data(
+        file_to_upload,
+        data,
+        frame=start_page)).place(
+                                relx=0.5,
+                                rely=0.5,
+                                anchor=CENTER)
     customtkinter.CTkButton(download_page, text="Main Page", command=lambda: raise_frame(start_page)).place(
         relx=0.5,
         rely=0.9,
