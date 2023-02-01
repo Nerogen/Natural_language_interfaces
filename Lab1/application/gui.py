@@ -111,6 +111,26 @@ if __name__ == '__main__':
         rely=0.9,
         anchor=CENTER)
 
+#######################################################################
+    # TO DO: filters
+    filter_page = customtkinter.CTkFrame(master=root,
+                                         width=width,
+                                         height=height,
+                                         corner_radius=4)
+    filter_page.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+    customtkinter.CTkButton(filter_page, text="Filter", command=lambda: filter_records(
+        data,
+        frame=work_with_vocab
+    )).place(
+        relx=0.5,
+        rely=0.8,
+        anchor=CENTER)
+    customtkinter.CTkButton(filter_page, text="Main Page", command=lambda: raise_frame(start_page)).place(
+        relx=0.5,
+        rely=0.9,
+        anchor=CENTER)
+
 ########################################################################
     # TO DO: special form for different lexemes
     making_word_form = customtkinter.CTkFrame(master=root,
