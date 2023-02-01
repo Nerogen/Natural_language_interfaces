@@ -1,16 +1,5 @@
-import customtkinter
-
-customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("green")
-width = 300
-height = 150
-root = customtkinter.CTk()
-root.title("Vocabulary")
-root.geometry(str(width) + "x" + str(height) + "+300+300")
-
-
-def print_data():
-    print(input_data.get())
+def raise_frame(frame):
+    frame.tkraise()
 
 
 # to do: read and load data from pdf
