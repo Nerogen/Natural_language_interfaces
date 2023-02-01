@@ -139,7 +139,14 @@ if __name__ == '__main__':
                                               corner_radius=4)
     making_word_form.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-    button4 = customtkinter.CTkButton(making_word_form, text="Main Page", command=lambda: raise_frame(start_page)).place(
+    customtkinter.CTkButton(making_word_form, text="Generate", command=lambda: generate_lexeme_form(
+        base_lexeme=None,
+        frame=start_page
+    )).place(
+        relx=0.5,
+        rely=0.8,
+        anchor=CENTER)
+    customtkinter.CTkButton(making_word_form, text="Main Page", command=lambda: raise_frame(start_page)).place(
         relx=0.5,
         rely=0.9,
         anchor=CENTER)
