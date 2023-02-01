@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
     input_data = customtkinter.CTkEntry(download_page, placeholder_text="input PDF name")
     input_data.place(relx=0.5, rely=0.4, anchor=CENTER)
+    file_name = input_data.get()
 
     customtkinter.CTkButton(download_page, text="Download Data", command=lambda: download_data(
         file_name,
@@ -55,6 +56,9 @@ if __name__ == '__main__':
                                                                                                         anchor=CENTER)
 
 #########################################################################
+    # TO DO: get data from db
+
+    # testing data
     data = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13],
             [3, 4, 'jjdkd', 'ksks', 6, 6, 7, 8, 9, 10, 11, 13],
             [1, 1, 1, 1, 1, 6, 7, 8, 9, 10, 11, 13]]
@@ -70,7 +74,11 @@ if __name__ == '__main__':
     table = tksheet.Sheet(work_with_vocab, width=width, height=0.7*height)
     table.place(relx=0.5, rely=0.1, anchor=N)
 
-    table.set_sheet_data([[f"{data[ri][cj]}" for cj in range(y_size)] for ri in range(x_size)])
+    table.set_sheet_data(data)
+
+    # rc is right click
+    # you can edit rows/columns/cells right in app
+    # but changes don't save
     table.enable_bindings(("single_select",
                            "row_select",
                            "column_width_resize",
@@ -103,7 +111,7 @@ if __name__ == '__main__':
                                            width=width,
                                            height=height,
                                            corner_radius=4)
-    upload_page.place(relx=0.5, rely=0.55, anchor=CENTER)
+    upload_page.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     input_data = customtkinter.CTkEntry(upload_page, placeholder_text="input PDF name")
     input_data.place(relx=0.5, rely=0.4, anchor=CENTER)
