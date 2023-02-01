@@ -3,3 +3,5 @@ PyPDF2~=3.0.1
 customtkinter~=5.0.5
 psycopg2~=2.9.5
 tksheet~=5.4.1
+PyMuPDF~=1.21.1
+regex
