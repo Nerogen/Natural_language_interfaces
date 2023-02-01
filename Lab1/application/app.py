@@ -47,9 +47,9 @@ def generate_lexeme_form(base_lexeme, *args, **kwargs):
     pass
 
 
-if __name__ == '__main__':
-    input_data = customtkinter.CTkEntry(root, placeholder_text="input text")
-    input_data.pack()
-    button = customtkinter.CTkButton(root, text="Update", command=print_data).pack()
+def main():
+    pass
 
-    root.mainloop()
+
+if __name__ == "__main__":
+   main()
