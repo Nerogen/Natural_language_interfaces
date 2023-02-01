@@ -4,7 +4,6 @@ import tksheet
 
 from app import *
 
-
 if __name__ == '__main__':
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("green")
@@ -21,19 +20,20 @@ if __name__ == '__main__':
     start_page.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     customtkinter.CTkButton(start_page, text="Download Data", command=lambda: raise_frame(download_page)).place(
-                                                                                                        relx=0.5,
-                                                                                                        rely=0.4,
-                                                                                                        anchor=CENTER)
+        relx=0.5,
+        rely=0.4,
+        anchor=CENTER)
     customtkinter.CTkButton(start_page, text="Work with Vocabulary",
                             command=lambda: show_records(vocabulary={}, frame=work_with_vocab)).place(
-                                                                                                relx=0.5,
-                                                                                                rely=0.5,
-                                                                                                anchor=CENTER)
-    customtkinter.CTkButton(start_page, text="Generate Lexeme Form", command=lambda: raise_frame(making_word_form)).place(
-                                                                                                        relx=0.5,
-                                                                                                        rely=0.6,
-                                                                                                        anchor=CENTER)
-######################################################################
+        relx=0.5,
+        rely=0.5,
+        anchor=CENTER)
+    customtkinter.CTkButton(start_page, text="Generate Lexeme Form",
+                            command=lambda: raise_frame(making_word_form)).place(
+        relx=0.5,
+        rely=0.6,
+        anchor=CENTER)
+    ######################################################################
     download_page = customtkinter.CTkFrame(master=root,
                                            width=width,
                                            height=height,
@@ -47,15 +47,15 @@ if __name__ == '__main__':
     customtkinter.CTkButton(download_page, text="Download Data", command=lambda: download_data(
         file_name,
         frame=start_page)).place(
-                                 relx=0.5,
-                                 rely=0.5,
-                                 anchor=CENTER)
+        relx=0.5,
+        rely=0.5,
+        anchor=CENTER)
     customtkinter.CTkButton(download_page, text="Main Page", command=lambda: raise_frame(start_page)).place(
-                                                                                                        relx=0.5,
-                                                                                                        rely=0.9,
-                                                                                                        anchor=CENTER)
+        relx=0.5,
+        rely=0.9,
+        anchor=CENTER)
 
-#########################################################################
+    #########################################################################
     # TO DO: get data from db
 
     # testing data
@@ -69,7 +69,7 @@ if __name__ == '__main__':
                                              corner_radius=4)
     work_with_vocab.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-    table = tksheet.Sheet(work_with_vocab, width=width, height=0.7*height)
+    table = tksheet.Sheet(work_with_vocab, width=width, height=0.7 * height)
     table.place(relx=0.5, rely=0.1, anchor=N)
 
     table.set_sheet_data(data)
@@ -104,11 +104,11 @@ if __name__ == '__main__':
         rely=0.8,
         anchor=CENTER)
 
-########################################################################
+    ########################################################################
     upload_page = customtkinter.CTkFrame(master=root,
-                                           width=width,
-                                           height=height,
-                                           corner_radius=4)
+                                         width=width,
+                                         height=height,
+                                         corner_radius=4)
     upload_page.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     input_data = customtkinter.CTkEntry(upload_page, placeholder_text="input PDF name")
@@ -119,15 +119,15 @@ if __name__ == '__main__':
         file_to_upload,
         data,
         frame=start_page)).place(
-                                relx=0.5,
-                                rely=0.5,
-                                anchor=CENTER)
+        relx=0.5,
+        rely=0.5,
+        anchor=CENTER)
     customtkinter.CTkButton(download_page, text="Main Page", command=lambda: raise_frame(start_page)).place(
         relx=0.5,
         rely=0.9,
         anchor=CENTER)
 
-#######################################################################
+    #######################################################################
     # TO DO: filters
     filter_page = customtkinter.CTkFrame(master=root,
                                          width=width,
@@ -147,7 +147,7 @@ if __name__ == '__main__':
         rely=0.9,
         anchor=CENTER)
 
-########################################################################
+    ########################################################################
     # TO DO: special form for different lexemes
     making_word_form = customtkinter.CTkFrame(master=root,
                                               width=width,
@@ -167,7 +167,6 @@ if __name__ == '__main__':
         rely=0.9,
         anchor=CENTER)
 
-########################################################################
+    ########################################################################
     raise_frame(start_page)
     root.mainloop()
-

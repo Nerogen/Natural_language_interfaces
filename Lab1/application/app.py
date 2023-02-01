@@ -1,14 +1,17 @@
 import fitz
 import re
 
+
 def raise_frame(frame):
     frame.tkraise()
+
 
 # regular expression without numbers in words \b[^\W\d]+\b
 # regular expression with numbers in end of word \b[^\W\d]+\d*\b
 def convert_text_to_set(text):
     result = re.findall(r'\w+\b', text)
     return set(result)
+
 
 # to do: read and load data from pdf
 def download_data(file_from, *args, **kwargs):
@@ -28,7 +31,6 @@ def upload_data(file_to, data, *args, **kwargs):
     with open(file_to, "w") as txt:
         txt.write(data)
     raise_frame(kwargs['frame'])
-
 
 
 # to do: display vocabulary records on the screen
@@ -69,4 +71,4 @@ def main():
 
 
 if __name__ == "__main__":
-   main()
+    main()
