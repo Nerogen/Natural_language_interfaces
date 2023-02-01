@@ -1,5 +1,6 @@
-import fitz
 import re
+
+import fitz
 
 
 def raise_frame(frame):
@@ -20,8 +21,8 @@ def download_data(file_from, *args, **kwargs):
     text = ''
     for i in range(doc.page_count):
         page = doc.load_page(i)
-        pageText = page.get_text("text")
-        text += pageText
+        page_text = page.get_text("text")
+        text += page_text
     raise_frame(kwargs['frame'])
     return text
 
