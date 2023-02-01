@@ -32,7 +32,8 @@ def save_record(record, *args, **kwargs):
 
 
 # to do: filter records by parameters
-def filter_records(*args, **kwargs):
+def filter_records(data, *args, **kwargs):
+    raise_frame(kwargs['frame'])
     pass
 
 
