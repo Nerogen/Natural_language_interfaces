@@ -62,8 +62,6 @@ if __name__ == '__main__':
     data = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13],
             [3, 4, 'jjdkd', 'ksks', 6, 6, 7, 8, 9, 10, 11, 13],
             [1, 1, 1, 1, 1, 6, 7, 8, 9, 10, 11, 13]]
-    x_size = len(data)
-    y_size = len(data[0])
 
     work_with_vocab = customtkinter.CTkFrame(master=root,
                                              width=width,
