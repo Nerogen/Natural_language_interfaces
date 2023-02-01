@@ -1,3 +1,5 @@
+import fitz
+
 def raise_frame(frame):
     frame.tkraise()
 
@@ -5,14 +7,22 @@ def raise_frame(frame):
 # to do: read and load data from pdf
 def download_data(file_from, *args, **kwargs):
     # use frame as kwarg to move from one page to another
+    doc = fitz.open(file_from)
+    text = ''
+    for i in range(doc.page_count):
+        page = doc.load_page(i)
+        pageText = page.get_text("text")
+        text += pageText
     raise_frame(kwargs['frame'])
-    pass
+    return text
 
 
 # to do: save data in file
 def upload_data(file_to, data, *args, **kwargs):
+    with open(file_to, "w") as txt:
+        txt.write(data)
     raise_frame(kwargs['frame'])
-    pass
+
 
 
 # to do: display vocabulary records on the screen
