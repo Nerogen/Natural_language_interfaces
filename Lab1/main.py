@@ -9,6 +9,7 @@ data: list[str] = []
 
 
 def destroy_all():
+    """Destroy all widgets of window"""
     for widget in widgets_for_destroy:
         raise_frame(widget)
 
@@ -76,7 +77,15 @@ def vocabulary_logic():
 def generate_lexeme_logic():
     destroy_all()
 
-    print("generate_lexeme")
+    show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
+    show_page.grid(row=1, column=0)
+
+    file_name = customtkinter.CTkComboBox(master=show_page, values=["hello", 'set'])
+    file_name.set('set')
+    file_name.grid(row=0, column=1)
+
+    tokens = customtkinter.CTkButton(master=show_page, text="Tokens")
+    tokens.grid(row=0, column=2)
 
 
 def help_logic():
