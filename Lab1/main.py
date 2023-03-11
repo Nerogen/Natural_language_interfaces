@@ -87,11 +87,23 @@ def generate_lexeme_logic():
     tokens = customtkinter.CTkButton(master=show_page, text="Tokens")
     tokens.grid(row=0, column=2)
 
+    widgets_for_destroy.append(show_page)
+
 
 def help_logic():
     destroy_all()
 
-    print("Help logic")
+    show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
+    show_page.grid(row=1, column=0)
+
+    help_doc = ("vocabulary:", "generate lexeme")
+
+    list_view = Listbox(master=show_page, height=10, width=85)
+    for item in range(len(help_doc)):
+        list_view.insert(item, help_doc[item])
+    list_view.grid(row=2, column=1)
+    widgets_for_destroy.append(list_view)
+    widgets_for_destroy.append(show_page)
 
 
 def convert_text_to_set(text: str) -> set:
