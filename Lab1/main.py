@@ -68,6 +68,15 @@ def vocabulary_logic():
     update = customtkinter.CTkButton(master=show_page, text="Update", command=update_data)
     update.grid(row=1, column=3)
 
+    save = customtkinter.CTkButton(master=show_page, text="Save")
+    save.grid(row=2, column=1)
+
+    delete = customtkinter.CTkButton(master=show_page, text="Delete")
+    delete.grid(row=2, column=2)
+
+    filter_btn = customtkinter.CTkButton(master=show_page, text="Filter")
+    filter_btn.grid(row=2, column=3)
+
     # save = customtkinter.CTkButton(master=show_page, text="Save", command=save_logic)
     # save.grid(row=0, column=4)
 
@@ -96,7 +105,7 @@ def help_logic():
     show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
     show_page.grid(row=1, column=0)
 
-    help_doc = ("vocabulary:", "generate lexeme")
+    help_doc = ("vocabulary:", "generate lexeme:")
 
     list_view = Listbox(master=show_page, height=10, width=85)
     for item in range(len(help_doc)):
