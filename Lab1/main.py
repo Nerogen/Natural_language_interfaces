@@ -98,7 +98,8 @@ def generate_lexeme_logic():
     kind = customtkinter.CTkComboBox(master=show_page, values=["Kind", "Masculine", "Feminine", "Neuter"])
     kind.grid(row=1, column=1)
 
-    kind = customtkinter.CTkComboBox(master=show_page, values=["Case", "Subjective Case", "Objective Case", "Possessive Case"])
+    kind = customtkinter.CTkComboBox(master=show_page,
+                                     values=["Case", "Subjective Case", "Objective Case", "Possessive Case"])
     kind.grid(row=1, column=2)
 
     generate_btn = customtkinter.CTkButton(master=show_page, text="Generate", command=generate)
@@ -113,9 +114,25 @@ def help_logic():
     show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
     show_page.grid(row=1, column=0)
 
-    help_doc = ("vocabulary:", "generate lexeme:")
+    help_doc = (
+        "vocabulary: has some methods to process some text",
+        "input field for file - search some file in project by the name",
+        "View - generate icon for read and view file",
+        "Tokens - get some lexemes and parsers words according to the rules",
+        "Search - search word in text",
+        "Update - regenerate window",
+        "Save - save file from processed data",
+        "Delete - delete some sentences from text",
+        "Filter - filter sentences by the dictionary",
+        "generate lexeme: generate lexeme with the some choice rules",
+        "input word field - for input some word which need generate with some rule",
+        "generate button - start generate lexeme",
+        "number of - choice singular word of plural",
+        "kind - choice Masculine/Feminine etc.",
+        "case - choice Subjective Case etc."
+    )
 
-    list_view = Listbox(master=show_page, height=10, width=85)
+    list_view = Listbox(master=show_page, height=17, width=85)
     for item in range(len(help_doc)):
         list_view.insert(item, help_doc[item])
     list_view.grid(row=2, column=1)
