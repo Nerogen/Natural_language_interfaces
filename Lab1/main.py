@@ -77,22 +77,32 @@ def vocabulary_logic():
     filter_btn = customtkinter.CTkButton(master=show_page, text="Filter")
     filter_btn.grid(row=2, column=3)
 
-
     widgets_for_destroy.append(show_page)
 
 
 def generate_lexeme_logic():
     destroy_all()
 
+    def generate():
+        pass
+
     show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
     show_page.grid(row=1, column=0)
 
-    file_name = customtkinter.CTkComboBox(master=show_page, values=["hello", 'set'])
-    file_name.set('set')
-    file_name.grid(row=0, column=1)
+    word = customtkinter.CTkEntry(master=show_page, placeholder_text="Input word")
+    word.grid(row=0, column=0)
 
-    tokens = customtkinter.CTkButton(master=show_page, text="Tokens")
-    tokens.grid(row=0, column=2)
+    number_of = customtkinter.CTkComboBox(master=show_page, values=["Number of", "Singular", "Plural"])
+    number_of.grid(row=1, column=0)
+
+    kind = customtkinter.CTkComboBox(master=show_page, values=["Kind", "Masculine", "Feminine", "Neuter"])
+    kind.grid(row=1, column=1)
+
+    kind = customtkinter.CTkComboBox(master=show_page, values=["Case", "Subjective Case", "Objective Case", "Possessive Case"])
+    kind.grid(row=1, column=2)
+
+    generate_btn = customtkinter.CTkButton(master=show_page, text="Generate", command=generate)
+    generate_btn.grid(row=0, column=1)
 
     widgets_for_destroy.append(show_page)
 
