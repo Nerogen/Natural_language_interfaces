@@ -77,9 +77,6 @@ def vocabulary_logic():
     filter_btn = customtkinter.CTkButton(master=show_page, text="Filter")
     filter_btn.grid(row=2, column=3)
 
-    # save = customtkinter.CTkButton(master=show_page, text="Save", command=save_logic)
-    # save.grid(row=0, column=4)
-
     widgets_for_destroy.append(show_page)
 
 
