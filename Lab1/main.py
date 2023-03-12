@@ -1,12 +1,12 @@
 import re
+
 import customtkinter
 import fitz
-import spacy
 from tkinter import *
 
-nlp = spacy.load(r"C:\Users\cawap\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\en_core_web_sm\en_core_web_sm-3.5.0")
 widgets_for_destroy = []
 data: list[str] = []
+
 
 def destroy_all():
     """Destroy all widgets of window"""
@@ -33,6 +33,8 @@ def vocabulary_logic():
         widgets_for_destroy.append(list_view)
         widgets_for_destroy.append(view_frame)
 
+    def tokens_maker():  # -> spacy work
+        pass
 
     def update_data():
         destroy_all()
@@ -54,7 +56,7 @@ def vocabulary_logic():
     view = customtkinter.CTkButton(master=show_page, text="View", command=view_file)
     view.grid(row=0, column=2)
 
-    tokens = customtkinter.CTkButton(master=show_page, text="Tokens", command=tokenize)
+    tokens = customtkinter.CTkButton(master=show_page, text="Tokens")
     tokens.grid(row=0, column=3)
 
     search_request = customtkinter.CTkEntry(master=show_page, placeholder_text="Input search key")
@@ -76,37 +78,6 @@ def vocabulary_logic():
     filter_btn.grid(row=2, column=3)
 
     widgets_for_destroy.append(show_page)
-
-def tokenize():
-    destroy_all()
-    def tokens_maker():  # -> spacy work
-        sentence_info_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
-        list_view = Listbox(master=sentence_info_page, height=10, width=85)
-        for item in range(len(data)):
-            list_view.insert(item, data[item])
-        sentence_info_page.grid(row=2, column=0)
-        list_view.grid(row=2, column=0)
-        if tokenize_sentence.get():
-            doc = nlp(tokenize_sentence.get())
-        for token in range(len(doc)):
-            if doc[token].pos_ == 'NOUN':
-                list_view.insert(token, f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].suffix_}  {doc[token].morph}')
-            else:
-                list_view.insert(token, f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].suffix_} ')
-
-        del doc
-        widgets_for_destroy.append(sentence_info_page)
-        widgets_for_destroy.append(list_view)
-
-    tokenize_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
-    tokenize_page.grid(row=1, column=0)
-
-    tokenize_sentence = customtkinter.CTkEntry(master=tokenize_page, placeholder_text="Input sentence", width=280, height=10)
-    tokenize_sentence.grid(row=0, column=0)
-
-    tokenize_btn = customtkinter.CTkButton(master=tokenize_page, text="tokenize", command=tokens_maker)
-    tokenize_btn.grid(row=0, column=2)
-
 
 
 def generate_lexeme_logic():
