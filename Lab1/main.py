@@ -1,3 +1,4 @@
+import random
 import re
 
 import customtkinter
@@ -5,8 +6,17 @@ import fitz
 import spacy
 from tkinter import *
 
+# en_core_web_sm
+nlp = spacy.load("en_core_web_sm")
+
 widgets_for_destroy = []
 data: list[str] = []
+en_vocabulary = dict()
+
+def get_pos(text):
+    left_bracket = text.find('(')
+    right_bracket = text.rfind(')')
+    return text[left_bracket + 1:right_bracket]
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -35,9 +45,6 @@ def vocabulary_logic():
         view_frame.grid(row=3, column=0)
         widgets_for_destroy.append(list_view)
         widgets_for_destroy.append(view_frame)
-
-    def tokens_maker():  # -> spacy work
-        pass
 
     def update_data():
         destroy_all()
@@ -89,21 +96,18 @@ def tokenize():
     def tokens_maker():  # -> spacy work
         sentence_info_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
         list_view = Listbox(master=sentence_info_page, height=10, width=85)
-        for item in range(len(data)):
-            list_view.insert(item, data[item])
         sentence_info_page.grid(row=2, column=0)
         list_view.grid(row=2, column=0)
         if tokenize_sentence.get():
             doc = nlp(tokenize_sentence.get())
         for token in range(len(doc)):
-            if doc[token].pos_ == 'NOUN':
+            if doc[token].has_morph():
                 list_view.insert(token,
-                                 f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].suffix_}  {doc[token].morph}')
+                                 f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].text[len(doc[token]) - 1:]} {doc[token].morph}')
             else:
                 list_view.insert(token,
-                                 f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].suffix_} ')
+                                 f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].text[len(doc[token]) - 1:]}')
 
-        del doc
         widgets_for_destroy.append(sentence_info_page)
         widgets_for_destroy.append(list_view)
 
@@ -116,33 +120,55 @@ def tokenize():
 
     tokenize_btn = customtkinter.CTkButton(master=tokenize_page, text="tokenize", command=tokens_maker)
     tokenize_btn.grid(row=0, column=2)
+    widgets_for_destroy.append(tokenize_page)
 
 
 def generate_lexeme_logic():
     destroy_all()
 
     def generate():
-        pass
+        generate_info_page = customtkinter.CTkFrame(master=show_page, width=width, height=height)
+        list_view_gen = Listbox(master=generate_info_page, height=10, width=85)
+        generate_info_page.grid(row=2, column=0)
+        list_view_gen.grid(row=2, column=0)
+        if pos_choice.get():
+            pos = get_pos(pos_choice.get())
+            word = random.sample(en_vocabulary[pos], 1)
+            doc = nlp(word[0])
+            for token in range(len(doc)):
+                if doc[token].has_morph():
+                    list_view_gen.insert(token,
+                                    f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].text[len(doc[token]) - 1:]} {doc[token].morph}')
+                else:
+                    list_view_gen.insert(token,
+                                    f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].text[len(doc[token]) - 1:]}')
+
+        widgets_for_destroy.append(generate_info_page)
+        widgets_for_destroy.append(list_view_gen)
 
     show_page = customtkinter.CTkFrame(master=main_page, width=width, height=height)
     show_page.grid(row=1, column=0)
 
-    word = customtkinter.CTkEntry(master=show_page, placeholder_text="Input word")
-    word.grid(row=0, column=0)
+    # word = customtkinter.CTkEntry(master=show_page, placeholder_text="Input word")
+    # word.grid(row=0, column=0)
 
-    number_of = customtkinter.CTkComboBox(master=show_page, values=["Number of", "Singular", "Plural"])
-    number_of.grid(row=1, column=0)
+    #number_of = customtkinter.CTkComboBox(master=show_page, values=["Number of", "Singular", "Plural"])
+    #number_of.grid(row=1, column=0)
 
-    kind = customtkinter.CTkComboBox(master=show_page, values=["Kind", "Masculine", "Feminine", "Neuter"])
-    kind.grid(row=1, column=1)
+    #kind = customtkinter.CTkComboBox(master=show_page, values=["Kind", "Masculine", "Feminine", "Neuter"])
+    #kind.grid(row=1, column=1)
 
-    kind = customtkinter.CTkComboBox(master=show_page,
-                                     values=["Case", "Subjective Case", "Objective Case", "Possessive Case"])
-    kind.grid(row=1, column=2)
+    #kind = customtkinter.CTkComboBox(master=show_page,
+    #                                 values=["Case", "Subjective Case", "Objective Case", "Possessive Case"])
+    #kind.grid(row=1, column=2)
 
     generate_btn = customtkinter.CTkButton(master=show_page, text="Generate", command=generate)
-    generate_btn.grid(row=0, column=1)
-
+    generate_btn.grid(row=0, column=2)
+    pos_choice = customtkinter.CTkComboBox(master=show_page,
+                                     values=["Существительное (NOUN)", "Глагол (VERB)", "Прилагательное (ADJ)",
+                                             "Наречие (ADV)", "Местоимение (PRON)", "Предлог (ADP)",
+                                             "Союз (CONJ)", "Междометие (INTJ)"])
+    pos_choice.grid(row=0, column=1)
     widgets_for_destroy.append(show_page)
 
 
@@ -192,7 +218,12 @@ def download_data(file_from: str) -> str:
         page = doc.load_page(i)
         page_text = page.get_text("text")
         text += page_text
-
+        doc1 = nlp(page_text)
+        for token in range(len(doc1)):
+            if doc1[token].pos_ in en_vocabulary:
+                en_vocabulary[doc1[token].pos_].add(doc1[token].text)
+            else:
+                en_vocabulary[doc1[token].pos_] = {doc1[token].text}
     return text
 
 
