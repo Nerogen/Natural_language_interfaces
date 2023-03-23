@@ -1,12 +1,14 @@
 import random
 import re
+
 import customtkinter
 import fitz
 import spacy
 from tkinter import *
+
 # en_core_web_sm
-nlp = spacy.load(
-            r"C:\Users\cawap\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\en_core_web_sm\en_core_web_sm-3.5.0")
+nlp = spacy.load("en_core_web_sm")
+
 widgets_for_destroy = []
 data: list[str] = []
 en_vocabulary = dict()
@@ -15,6 +17,9 @@ def get_pos(text):
     left_bracket = text.find('(')
     right_bracket = text.rfind(')')
     return text[left_bracket + 1:right_bracket]
+
+nlp = spacy.load("en_core_web_sm")
+
 
 def destroy_all():
     """Destroy all widgets of window"""
@@ -102,6 +107,7 @@ def tokenize():
             else:
                 list_view.insert(token,
                                  f'{doc[token].text} {doc[token].lemma_} {doc[token].pos_} {doc[token].text[len(doc[token]) - 1:]}')
+
         widgets_for_destroy.append(sentence_info_page)
         widgets_for_destroy.append(list_view)
 
@@ -115,6 +121,7 @@ def tokenize():
     tokenize_btn = customtkinter.CTkButton(master=tokenize_page, text="tokenize", command=tokens_maker)
     tokenize_btn.grid(row=0, column=2)
     widgets_for_destroy.append(tokenize_page)
+
 
 def generate_lexeme_logic():
     destroy_all()
